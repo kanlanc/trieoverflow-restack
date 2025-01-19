@@ -1,6 +1,6 @@
 # Project metadata
 [tool.poetry]
-name = "quickstart"
+name = "Trieoverflow-restack"
 version = "0.0.1"
 description = "A quickstart for Restack"
 authors = [
@@ -18,6 +18,13 @@ pydantic = "^2.10.4"
 
 # Build system configuration
 restack-ai = "^0.0.52"
+
+
+llama-index = "^0.12.5"
+llama-index-indices-managed-llama-cloud = "^0.6.3"
+llama-index-llms-anthropic = "^0.6.3"
+
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

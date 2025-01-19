@@ -30,6 +30,18 @@ class query_question_workflow:
     async def run(self, input):
 
 
+        # First go through RAG and if you cant find similar questions anywhere,
+        #  than go through the other agents
+
+        # For the discord message, formatting, you should definetely process the discord messages before you
+        # something with them esspecially using the "reference_message" field in the json to connect the dots
+
+        # You also need to look into how to extract the threads in the messages!
+
+
+        
+
+
 
 		
 

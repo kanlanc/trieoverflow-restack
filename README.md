@@ -65,3 +65,10 @@ executes `schedule_workflow.py` which will connect to Restack and execute the `G
 ## Deploy on Restack Cloud
 
 To deploy the application on Restack, you can create an account at [https://console.restack.io](https://console.restack.io)
+
+<!-- CAll the discord with this  -->
+
+<!-- curl -X GET \
+'https://discord.com/api/v9/channels/1292948253796466730/messages?limit=50' \
+-H 'Authorization: MjcxMTI3NTMzNjAzMjU4Mzgw.Gr1gpU.1HOfb3rpgneT52bHNhJ1FIyh_RoO5XX5KOBU4I' \
+-H 'Content-Type: application/json' -->

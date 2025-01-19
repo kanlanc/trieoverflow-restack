@@ -10,7 +10,7 @@ async def main():
     run_id = await client.schedule_workflow(
         workflow_name="query_question_workflow",
         workflow_id=workflow_id,
-        input="How can I fix the os.stat error that I keep getting"
+        input="How can I fix the os.stat error that I keep getting in restack"
     )
 
     await client.get_workflow_result(

@@ -1,0 +1,773 @@
+{
+  "message_documents": [
+    {
+      "type": "message",
+      "content": {
+        "type": 0,
+        "content": "even though technically you could deploy your nextjs with restack, i would advise to have your frontend on vercel and backend on restack cloud. you can always trigger and retrive workflows in nextjs following this https://github.com/restackio/examples-typescript/blob/main/nextjs/src/app/actions/trigger.ts",
+        "mentions": [],
+        "mention_roles": [],
+        "attachments": [],
+        "embeds": [
+          {
+            "type": "article",
+            "url": "https://github.com/restackio/examples-typescript/blob/main/nextjs/src/app/actions/trigger.ts",
+            "title": "examples-typescript/nextjs/src/app/actions/trigger.ts at main \u00b7 res...",
+            "description": "Restack AI examples for TypeScript. Contribute to restackio/examples-typescript development by creating an account on GitHub.",
+            "color": 1975079,
+            "provider": {
+              "name": "GitHub"
+            },
+            "thumbnail": {
+              "url": "https://opengraph.githubassets.com/f408b249f7bba5ea994dd37807f78545db5fa079e8f9c97d9ddeaf0ca1dc2a23/restackio/examples-typescript",
+              "proxy_url": "https://images-ext-1.discordapp.net/external/aSwlQa9v-NT7M3Llt6ua8dgs0lEotj20lA5lraRLZ1g/https/opengraph.githubassets.com/f408b249f7bba5ea994dd37807f78545db5fa079e8f9c97d9ddeaf0ca1dc2a23/restackio/examples-typescript",
+              "width": 1200,
+              "height": 600,
+              "placeholder": "vPcFDIJpiaaZh3h1eH8/yUT6Fg==",
+              "placeholder_version": 1,
+              "flags": 0
+            },
+            "content_scan_version": 1
+          }
+        ],
+        "timestamp": "2025-01-18T10:24:59.842000+00:00",
+        "edited_timestamp": null,
+        "flags": 0,
+        "components": [],
+        "id": "1330120752489304096",
+        "channel_id": "1293665802523902032",
+        "author": {
+          "id": "905943889494569000",
+          "username": "philipperestack",
+          "avatar": "36d0a20557eb8dce3f3fb7c90d9c3f4a",
+          "discriminator": "0",
+          "public_flags": 0,
+          "flags": 0,
+          "banner": null,
+          "accent_color": null,
+          "global_name": "Philippe",
+          "avatar_decoration_data": null,
+          "banner_color": null,
+          "clan": null,
+          "primary_guild": null
+        },
+        "pinned": false,
+        "mention_everyone": false,
+        "tts": false,
+        "references": [],
+        "children": [],
+        "referenced_messages": [],
+        "child_messages": []
+      }
+    },
+    {
+      "type": "message",
+      "content": {
+        "type": 0,
+        "content": "regarding deployment, you can copy this dockerfile in apps/backend https://github.com/restackio/examples-typescript/blob/main/quickstart/Dockerfile . If you follow turborepo you can have dockerfile path point to /apps/backend/Dockerfile and apps/backend",
+        "mentions": [],
+        "mention_roles": [],
+        "attachments": [],
+        "embeds": [
+          {
+            "type": "article",
+            "url": "https://github.com/restackio/examples-typescript/blob/main/quickstart/Dockerfile",
+            "title": "examples-typescript/quickstart/Dockerfile at main \u00b7 restackio/examp...",
+            "description": "Restack AI examples for TypeScript. Contribute to restackio/examples-typescript development by creating an account on GitHub.",
+            "color": 1975079,
+            "provider": {
+              "name": "GitHub"
+            },
+            "thumbnail": {
+              "url": "https://opengraph.githubassets.com/f408b249f7bba5ea994dd37807f78545db5fa079e8f9c97d9ddeaf0ca1dc2a23/restackio/examples-typescript",
+              "proxy_url": "https://images-ext-1.discordapp.net/external/aSwlQa9v-NT7M3Llt6ua8dgs0lEotj20lA5lraRLZ1g/https/opengraph.githubassets.com/f408b249f7bba5ea994dd37807f78545db5fa079e8f9c97d9ddeaf0ca1dc2a23/restackio/examples-typescript",
+              "width": 1200,
+              "height": 600,
+              "placeholder": "vPcFDIJpiaaZh3h1eH8/yUT6Fg==",
+              "placeholder_version": 1,
+              "flags": 0
+            },
+            "content_scan_version": 1
+          }
+        ],
+        "timestamp": "2025-01-18T10:24:03.414000+00:00",
+        "edited_timestamp": null,
+        "flags": 0,
+        "components": [],
+        "id": "1330120515813376000",
+        "channel_id": "1293665802523902032",
+        "author": {
+          "id": "905943889494569000",
+          "username": "philipperestack",
+          "avatar": "36d0a20557eb8dce3f3fb7c90d9c3f4a",
+          "discriminator": "0",
+          "public_flags": 0,
+          "flags": 0,
+          "banner": null,
+          "accent_color": null,
+          "global_name": "Philippe",
+          "avatar_decoration_data": null,
+          "banner_color": null,
+          "clan": null,
+          "primary_guild": null
+        },
+        "pinned": false,
+        "mention_everyone": false,
+        "tts": false,
+        "references": [],
+        "children": [],
+        "referenced_messages": [],
+        "child_messages": []
+      }
+    },
+    {
+      "type": "message",
+      "content": {
+        "type": 19,
+        "content": "Hey <@675081906911707156> , for this i would recommend making a monorepo with turborepo with apps/frontend for your nextjs and apps/backend for your restack services. I have an example here https://github.com/aboutphilippe/autonomous-videocreator-lumaai",
+        "mentions": [
+          {
+            "id": "675081906911707156",
+            "username": "hawksrevolution",
+            "avatar": "ec24fd878e6315a83ee94ba94caba92e",
+            "discriminator": "0",
+            "public_flags": 0,
+            "flags": 0,
+            "banner": null,
+            "accent_color": null,
+            "global_name": "Sergiu S",
+            "avatar_decoration_data": null,
+            "banner_color": null,
+            "clan": null,
+            "primary_guild": null
+          }
+        ],
+        "mention_roles": [],
+        "attachments": [],
+        "embeds": [
+          {
+            "type": "article",
+            "url": "https://github.com/aboutphilippe/autonomous-videocreator-lumaai",
+            "title": "GitHub - aboutphilippe/autonomous-videocreator-lumaai",
+            "description": "Contribute to aboutphilippe/autonomous-videocreator-lumaai development by creating an account on GitHub.",
+            "color": 1975079,
+            "reference_id": "1330120228889296967",
+            "provider": {
+              "name": "GitHub"
+            },
+            "thumbnail": {
+              "url": "https://opengraph.githubassets.com/44c6483cdc4661a866304f3d1c5702cf6d1eaf7020fa953ed966361378cc6fbc/aboutphilippe/autonomous-videocreator-lumaai",
+              "proxy_url": "https://images-ext-1.discordapp.net/external/pNBifGJe8MDb3LRjE53I9R2Gm68AUGS6Qly6orDRbtk/https/opengraph.githubassets.com/44c6483cdc4661a866304f3d1c5702cf6d1eaf7020fa953ed966361378cc6fbc/aboutphilippe/autonomous-videocreator-lumaai",
+              "width": 1200,
+              "height": 600,
+              "placeholder": "+/cFDIJKmaaYhnl1eG+Vj1L6GQ==",
+              "placeholder_version": 1,
+              "flags": 0
+            },
+            "content_scan_version": 1
+          }
+        ],
+        "timestamp": "2025-01-18T10:22:55.006000+00:00",
+        "edited_timestamp": null,
+        "flags": 0,
+        "components": [],
+        "id": "1330120228889296967",
+        "channel_id": "1293665802523902032",
+        "author": {
+          "id": "905943889494569000",
+          "username": "philipperestack",
+          "avatar": "36d0a20557eb8dce3f3fb7c90d9c3f4a",
+          "discriminator": "0",
+          "public_flags": 0,
+          "flags": 0,
+          "banner": null,
+          "accent_color": null,
+          "global_name": "Philippe",
+          "avatar_decoration_data": null,
+          "banner_color": null,
+          "clan": null,
+          "primary_guild": null
+        },
+        "pinned": false,
+        "mention_everyone": false,
+        "tts": false,
+        "message_reference": {
+          "type": 0,
+          "channel_id": "1293665802523902032",
+          "message_id": "1330049099361419264",
+          "guild_id": "1290621730200485900"
+        },
+        "position": 0,
+        "referenced_message": {
+          "type": 0,
+          "content": "Hi guys, I have a probably quite stupid question here. I'm trying to create a new stack. We have a repository with a nextJS application. Ideally I'd like to keep a mono-repo architecture and create one new folder in my monorepo called workflows (to create workflows in Javascript). I've connected my github, gave access to restack and clicked on import. However, I am stuck at this stage as I have no idea what Dockerfile I should give and why I need Docker for the managed Restack service. Appreciate your help \ud83d\ude4c",
+          "mentions": [],
+          "mention_roles": [],
+          "attachments": [
+            {
+              "id": "1330049099147251772",
+              "filename": "image.png",
+              "size": 214758,
+              "url": "https://cdn.discordapp.com/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+              "proxy_url": "https://media.discordapp.net/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+              "width": 1302,
+              "height": 1752,
+              "content_type": "image/png",
+              "content_scan_version": 1,
+              "placeholder": "yPcBBQCfJYSKiGapV3lmeDBYh8/J",
+              "placeholder_version": 1
+            }
+          ],
+          "embeds": [],
+          "timestamp": "2025-01-18T05:40:16.405000+00:00",
+          "edited_timestamp": null,
+          "flags": 32,
+          "components": [],
+          "id": "1330049099361419264",
+          "channel_id": "1293665802523902032",
+          "author": {
+            "id": "675081906911707156",
+            "username": "hawksrevolution",
+            "avatar": "ec24fd878e6315a83ee94ba94caba92e",
+            "discriminator": "0",
+            "public_flags": 0,
+            "flags": 0,
+            "banner": null,
+            "accent_color": null,
+            "global_name": "Sergiu S",
+            "avatar_decoration_data": null,
+            "banner_color": null,
+            "clan": null,
+            "primary_guild": null
+          },
+          "pinned": false,
+          "mention_everyone": false,
+          "tts": false,
+          "thread": {
+            "id": "1330049099361419264",
+            "type": 11,
+            "last_message_id": "1330078490317295676",
+            "flags": 0,
+            "guild_id": "1290621730200485900",
+            "name": "Restack cloud",
+            "parent_id": "1293665802523902032",
+            "rate_limit_per_user": 0,
+            "bitrate": 64000,
+            "user_limit": 0,
+            "rtc_region": null,
+            "owner_id": "932662489617928295",
+            "thread_metadata": {
+              "archived": false,
+              "archive_timestamp": "2025-01-18T07:34:40.906000+00:00",
+              "auto_archive_duration": 4320,
+              "locked": false,
+              "create_timestamp": "2025-01-18T07:34:40.906000+00:00"
+            },
+            "message_count": 2,
+            "member_count": 3,
+            "total_message_sent": 2,
+            "member_ids_preview": [
+              "675081906911707156",
+              "932662489617928295",
+              "905943889494569000"
+            ]
+          }
+        },
+        "references": [
+          "1330049099361419264",
+          "1330049099361419264"
+        ],
+        "children": [],
+        "referenced_messages": [
+          {
+            "type": 0,
+            "content": "Hi guys, I have a probably quite stupid question here. I'm trying to create a new stack. We have a repository with a nextJS application. Ideally I'd like to keep a mono-repo architecture and create one new folder in my monorepo called workflows (to create workflows in Javascript). I've connected my github, gave access to restack and clicked on import. However, I am stuck at this stage as I have no idea what Dockerfile I should give and why I need Docker for the managed Restack service. Appreciate your help \ud83d\ude4c",
+            "mentions": [],
+            "mention_roles": [],
+            "attachments": [
+              {
+                "id": "1330049099147251772",
+                "filename": "image.png",
+                "size": 214758,
+                "url": "https://cdn.discordapp.com/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+                "proxy_url": "https://media.discordapp.net/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+                "width": 1302,
+                "height": 1752,
+                "content_type": "image/png",
+                "content_scan_version": 1,
+                "placeholder": "yPcBBQCfJYSKiGapV3lmeDBYh8/J",
+                "placeholder_version": 1
+              }
+            ],
+            "embeds": [],
+            "timestamp": "2025-01-18T05:40:16.405000+00:00",
+            "edited_timestamp": null,
+            "flags": 32,
+            "components": [],
+            "id": "1330049099361419264",
+            "channel_id": "1293665802523902032",
+            "author": {
+              "id": "675081906911707156",
+              "username": "hawksrevolution",
+              "avatar": "ec24fd878e6315a83ee94ba94caba92e",
+              "discriminator": "0",
+              "public_flags": 0,
+              "flags": 0,
+              "banner": null,
+              "accent_color": null,
+              "global_name": "Sergiu S",
+              "avatar_decoration_data": null,
+              "banner_color": null,
+              "clan": null,
+              "primary_guild": null
+            },
+            "pinned": false,
+            "mention_everyone": false,
+            "tts": false,
+            "thread": {
+              "id": "1330049099361419264",
+              "type": 11,
+              "last_message_id": "1330078490317295676",
+              "flags": 0,
+              "guild_id": "1290621730200485900",
+              "name": "Restack cloud",
+              "parent_id": "1293665802523902032",
+              "rate_limit_per_user": 0,
+              "bitrate": 64000,
+              "user_limit": 0,
+              "rtc_region": null,
+              "owner_id": "932662489617928295",
+              "thread_metadata": {
+                "archived": false,
+                "archive_timestamp": "2025-01-18T07:34:40.906000+00:00",
+                "auto_archive_duration": 4320,
+                "locked": false,
+                "create_timestamp": "2025-01-18T07:34:40.906000+00:00"
+              },
+              "message_count": 2,
+              "member_count": 3,
+              "total_message_sent": 2,
+              "member_ids_preview": [
+                "675081906911707156",
+                "932662489617928295",
+                "905943889494569000"
+              ]
+            },
+            "references": [],
+            "children": [
+              "1330120228889296967"
+            ]
+          },
+          {
+            "type": 0,
+            "content": "Hi guys, I have a probably quite stupid question here. I'm trying to create a new stack. We have a repository with a nextJS application. Ideally I'd like to keep a mono-repo architecture and create one new folder in my monorepo called workflows (to create workflows in Javascript). I've connected my github, gave access to restack and clicked on import. However, I am stuck at this stage as I have no idea what Dockerfile I should give and why I need Docker for the managed Restack service. Appreciate your help \ud83d\ude4c",
+            "mentions": [],
+            "mention_roles": [],
+            "attachments": [
+              {
+                "id": "1330049099147251772",
+                "filename": "image.png",
+                "size": 214758,
+                "url": "https://cdn.discordapp.com/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+                "proxy_url": "https://media.discordapp.net/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+                "width": 1302,
+                "height": 1752,
+                "content_type": "image/png",
+                "content_scan_version": 1,
+                "placeholder": "yPcBBQCfJYSKiGapV3lmeDBYh8/J",
+                "placeholder_version": 1
+              }
+            ],
+            "embeds": [],
+            "timestamp": "2025-01-18T05:40:16.405000+00:00",
+            "edited_timestamp": null,
+            "flags": 32,
+            "components": [],
+            "id": "1330049099361419264",
+            "channel_id": "1293665802523902032",
+            "author": {
+              "id": "675081906911707156",
+              "username": "hawksrevolution",
+              "avatar": "ec24fd878e6315a83ee94ba94caba92e",
+              "discriminator": "0",
+              "public_flags": 0,
+              "flags": 0,
+              "banner": null,
+              "accent_color": null,
+              "global_name": "Sergiu S",
+              "avatar_decoration_data": null,
+              "banner_color": null,
+              "clan": null,
+              "primary_guild": null
+            },
+            "pinned": false,
+            "mention_everyone": false,
+            "tts": false,
+            "thread": {
+              "id": "1330049099361419264",
+              "type": 11,
+              "last_message_id": "1330078490317295676",
+              "flags": 0,
+              "guild_id": "1290621730200485900",
+              "name": "Restack cloud",
+              "parent_id": "1293665802523902032",
+              "rate_limit_per_user": 0,
+              "bitrate": 64000,
+              "user_limit": 0,
+              "rtc_region": null,
+              "owner_id": "932662489617928295",
+              "thread_metadata": {
+                "archived": false,
+                "archive_timestamp": "2025-01-18T07:34:40.906000+00:00",
+                "auto_archive_duration": 4320,
+                "locked": false,
+                "create_timestamp": "2025-01-18T07:34:40.906000+00:00"
+              },
+              "message_count": 2,
+              "member_count": 3,
+              "total_message_sent": 2,
+              "member_ids_preview": [
+                "675081906911707156",
+                "932662489617928295",
+                "905943889494569000"
+              ]
+            },
+            "references": [],
+            "children": [
+              "1330120228889296967"
+            ]
+          }
+        ],
+        "child_messages": []
+      }
+    },
+    {
+      "type": "message",
+      "content": {
+        "type": 18,
+        "content": "Restack cloud",
+        "mentions": [],
+        "mention_roles": [],
+        "attachments": [],
+        "embeds": [],
+        "timestamp": "2025-01-18T07:34:40.939000+00:00",
+        "edited_timestamp": null,
+        "flags": 0,
+        "components": [],
+        "id": "1330077891303571563",
+        "channel_id": "1293665802523902032",
+        "author": {
+          "id": "932662489617928295",
+          "username": "martinbachrestack",
+          "avatar": "d529f9c44139b9a8a72f2823dbaf2e59",
+          "discriminator": "0",
+          "public_flags": 0,
+          "flags": 0,
+          "banner": null,
+          "accent_color": null,
+          "global_name": "Martin Bach [restack.io]",
+          "avatar_decoration_data": null,
+          "banner_color": null,
+          "clan": null,
+          "primary_guild": null
+        },
+        "pinned": false,
+        "mention_everyone": false,
+        "tts": false,
+        "message_reference": {
+          "type": 0,
+          "channel_id": "1330049099361419264",
+          "guild_id": "1290621730200485900"
+        },
+        "position": 0,
+        "references": [],
+        "children": [],
+        "referenced_messages": [],
+        "child_messages": []
+      }
+    }
+  ],
+  "thread_documents": [
+    {
+      "type": "thread",
+      "content": {
+        "thread_info": {
+          "thread_id": "1330049099361419264",
+          "thread_metadata": {
+            "id": "1330049099361419264",
+            "type": 11,
+            "last_message_id": "1330078490317295676",
+            "flags": 0,
+            "guild_id": "1290621730200485900",
+            "name": "Restack cloud",
+            "parent_id": "1293665802523902032",
+            "rate_limit_per_user": 0,
+            "bitrate": 64000,
+            "user_limit": 0,
+            "rtc_region": null,
+            "owner_id": "932662489617928295",
+            "thread_metadata": {
+              "archived": false,
+              "archive_timestamp": "2025-01-18T07:34:40.906000+00:00",
+              "auto_archive_duration": 4320,
+              "locked": false,
+              "create_timestamp": "2025-01-18T07:34:40.906000+00:00"
+            },
+            "message_count": 2,
+            "member_count": 3,
+            "total_message_sent": 2,
+            "member_ids_preview": [
+              "675081906911707156",
+              "932662489617928295",
+              "905943889494569000"
+            ]
+          },
+          "messages": [
+            "1330049099361419264"
+          ]
+        },
+        "messages": [
+          {
+            "type": 0,
+            "content": "Hi guys, I have a probably quite stupid question here. I'm trying to create a new stack. We have a repository with a nextJS application. Ideally I'd like to keep a mono-repo architecture and create one new folder in my monorepo called workflows (to create workflows in Javascript). I've connected my github, gave access to restack and clicked on import. However, I am stuck at this stage as I have no idea what Dockerfile I should give and why I need Docker for the managed Restack service. Appreciate your help \ud83d\ude4c",
+            "mentions": [],
+            "mention_roles": [],
+            "attachments": [
+              {
+                "id": "1330049099147251772",
+                "filename": "image.png",
+                "size": 214758,
+                "url": "https://cdn.discordapp.com/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+                "proxy_url": "https://media.discordapp.net/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+                "width": 1302,
+                "height": 1752,
+                "content_type": "image/png",
+                "content_scan_version": 1,
+                "placeholder": "yPcBBQCfJYSKiGapV3lmeDBYh8/J",
+                "placeholder_version": 1
+              }
+            ],
+            "embeds": [],
+            "timestamp": "2025-01-18T05:40:16.405000+00:00",
+            "edited_timestamp": null,
+            "flags": 32,
+            "components": [],
+            "id": "1330049099361419264",
+            "channel_id": "1293665802523902032",
+            "author": {
+              "id": "675081906911707156",
+              "username": "hawksrevolution",
+              "avatar": "ec24fd878e6315a83ee94ba94caba92e",
+              "discriminator": "0",
+              "public_flags": 0,
+              "flags": 0,
+              "banner": null,
+              "accent_color": null,
+              "global_name": "Sergiu S",
+              "avatar_decoration_data": null,
+              "banner_color": null,
+              "clan": null,
+              "primary_guild": null
+            },
+            "pinned": false,
+            "mention_everyone": false,
+            "tts": false,
+            "thread": {
+              "id": "1330049099361419264",
+              "type": 11,
+              "last_message_id": "1330078490317295676",
+              "flags": 0,
+              "guild_id": "1290621730200485900",
+              "name": "Restack cloud",
+              "parent_id": "1293665802523902032",
+              "rate_limit_per_user": 0,
+              "bitrate": 64000,
+              "user_limit": 0,
+              "rtc_region": null,
+              "owner_id": "932662489617928295",
+              "thread_metadata": {
+                "archived": false,
+                "archive_timestamp": "2025-01-18T07:34:40.906000+00:00",
+                "auto_archive_duration": 4320,
+                "locked": false,
+                "create_timestamp": "2025-01-18T07:34:40.906000+00:00"
+              },
+              "message_count": 2,
+              "member_count": 3,
+              "total_message_sent": 2,
+              "member_ids_preview": [
+                "675081906911707156",
+                "932662489617928295",
+                "905943889494569000"
+              ]
+            },
+            "references": [],
+            "children": [
+              "1330120228889296967"
+            ],
+            "referenced_messages": [],
+            "child_messages": [
+              {
+                "type": 19,
+                "content": "Hey <@675081906911707156> , for this i would recommend making a monorepo with turborepo with apps/frontend for your nextjs and apps/backend for your restack services. I have an example here https://github.com/aboutphilippe/autonomous-videocreator-lumaai",
+                "mentions": [
+                  {
+                    "id": "675081906911707156",
+                    "username": "hawksrevolution",
+                    "avatar": "ec24fd878e6315a83ee94ba94caba92e",
+                    "discriminator": "0",
+                    "public_flags": 0,
+                    "flags": 0,
+                    "banner": null,
+                    "accent_color": null,
+                    "global_name": "Sergiu S",
+                    "avatar_decoration_data": null,
+                    "banner_color": null,
+                    "clan": null,
+                    "primary_guild": null
+                  }
+                ],
+                "mention_roles": [],
+                "attachments": [],
+                "embeds": [
+                  {
+                    "type": "article",
+                    "url": "https://github.com/aboutphilippe/autonomous-videocreator-lumaai",
+                    "title": "GitHub - aboutphilippe/autonomous-videocreator-lumaai",
+                    "description": "Contribute to aboutphilippe/autonomous-videocreator-lumaai development by creating an account on GitHub.",
+                    "color": 1975079,
+                    "reference_id": "1330120228889296967",
+                    "provider": {
+                      "name": "GitHub"
+                    },
+                    "thumbnail": {
+                      "url": "https://opengraph.githubassets.com/44c6483cdc4661a866304f3d1c5702cf6d1eaf7020fa953ed966361378cc6fbc/aboutphilippe/autonomous-videocreator-lumaai",
+                      "proxy_url": "https://images-ext-1.discordapp.net/external/pNBifGJe8MDb3LRjE53I9R2Gm68AUGS6Qly6orDRbtk/https/opengraph.githubassets.com/44c6483cdc4661a866304f3d1c5702cf6d1eaf7020fa953ed966361378cc6fbc/aboutphilippe/autonomous-videocreator-lumaai",
+                      "width": 1200,
+                      "height": 600,
+                      "placeholder": "+/cFDIJKmaaYhnl1eG+Vj1L6GQ==",
+                      "placeholder_version": 1,
+                      "flags": 0
+                    },
+                    "content_scan_version": 1
+                  }
+                ],
+                "timestamp": "2025-01-18T10:22:55.006000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "id": "1330120228889296967",
+                "channel_id": "1293665802523902032",
+                "author": {
+                  "id": "905943889494569000",
+                  "username": "philipperestack",
+                  "avatar": "36d0a20557eb8dce3f3fb7c90d9c3f4a",
+                  "discriminator": "0",
+                  "public_flags": 0,
+                  "flags": 0,
+                  "banner": null,
+                  "accent_color": null,
+                  "global_name": "Philippe",
+                  "avatar_decoration_data": null,
+                  "banner_color": null,
+                  "clan": null,
+                  "primary_guild": null
+                },
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "message_reference": {
+                  "type": 0,
+                  "channel_id": "1293665802523902032",
+                  "message_id": "1330049099361419264",
+                  "guild_id": "1290621730200485900"
+                },
+                "position": 0,
+                "referenced_message": {
+                  "type": 0,
+                  "content": "Hi guys, I have a probably quite stupid question here. I'm trying to create a new stack. We have a repository with a nextJS application. Ideally I'd like to keep a mono-repo architecture and create one new folder in my monorepo called workflows (to create workflows in Javascript). I've connected my github, gave access to restack and clicked on import. However, I am stuck at this stage as I have no idea what Dockerfile I should give and why I need Docker for the managed Restack service. Appreciate your help \ud83d\ude4c",
+                  "mentions": [],
+                  "mention_roles": [],
+                  "attachments": [
+                    {
+                      "id": "1330049099147251772",
+                      "filename": "image.png",
+                      "size": 214758,
+                      "url": "https://cdn.discordapp.com/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+                      "proxy_url": "https://media.discordapp.net/attachments/1293665802523902032/1330049099147251772/image.png?ex=678d3900&is=678be780&hm=269fb0395c24970b0f53166e28323f0ac913f6749b0db93cd715ce33cb2e6785&",
+                      "width": 1302,
+                      "height": 1752,
+                      "content_type": "image/png",
+                      "content_scan_version": 1,
+                      "placeholder": "yPcBBQCfJYSKiGapV3lmeDBYh8/J",
+                      "placeholder_version": 1
+                    }
+                  ],
+                  "embeds": [],
+                  "timestamp": "2025-01-18T05:40:16.405000+00:00",
+                  "edited_timestamp": null,
+                  "flags": 32,
+                  "components": [],
+                  "id": "1330049099361419264",
+                  "channel_id": "1293665802523902032",
+                  "author": {
+                    "id": "675081906911707156",
+                    "username": "hawksrevolution",
+                    "avatar": "ec24fd878e6315a83ee94ba94caba92e",
+                    "discriminator": "0",
+                    "public_flags": 0,
+                    "flags": 0,
+                    "banner": null,
+                    "accent_color": null,
+                    "global_name": "Sergiu S",
+                    "avatar_decoration_data": null,
+                    "banner_color": null,
+                    "clan": null,
+                    "primary_guild": null
+                  },
+                  "pinned": false,
+                  "mention_everyone": false,
+                  "tts": false,
+                  "thread": {
+                    "id": "1330049099361419264",
+                    "type": 11,
+                    "last_message_id": "1330078490317295676",
+                    "flags": 0,
+                    "guild_id": "1290621730200485900",
+                    "name": "Restack cloud",
+                    "parent_id": "1293665802523902032",
+                    "rate_limit_per_user": 0,
+                    "bitrate": 64000,
+                    "user_limit": 0,
+                    "rtc_region": null,
+                    "owner_id": "932662489617928295",
+                    "thread_metadata": {
+                      "archived": false,
+                      "archive_timestamp": "2025-01-18T07:34:40.906000+00:00",
+                      "auto_archive_duration": 4320,
+                      "locked": false,
+                      "create_timestamp": "2025-01-18T07:34:40.906000+00:00"
+                    },
+                    "message_count": 2,
+                    "member_count": 3,
+                    "total_message_sent": 2,
+                    "member_ids_preview": [
+                      "675081906911707156",
+                      "932662489617928295",
+                      "905943889494569000"
+                    ]
+                  }
+                },
+                "references": [
+                  "1330049099361419264",
+                  "1330049099361419264"
+                ],
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
