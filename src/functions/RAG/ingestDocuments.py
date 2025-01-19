@@ -6,8 +6,8 @@ from llama_index.core.query_engine import RetrieverQueryEngine
 from typing import Dict, List
 import os
 
-@function.defn()
-async def llama_cloud_rag(input: dict) -> dict:
+
+async def create_questions_from_processed_discord_messages(input: dict) -> dict:
     # Validate input and API keys
     if not input:
         raise FunctionFailure("Invalid input: input dictionary cannot be empty", non_retryable=True)
@@ -15,7 +15,6 @@ async def llama_cloud_rag(input: dict) -> dict:
     required_keys = {
         "LLAMA_CLOUD_API_KEY": os.getenv("LLAMA_CLOUD_API_KEY"),
         "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
-
     }
     
     missing_keys = [k for k, v in required_keys.items() if not v]
@@ -24,6 +23,7 @@ async def llama_cloud_rag(input: dict) -> dict:
 
     try:
         # Initialize LlamaCloud Index
+        
 
         index = LlamaCloudIndex(
             name="Trieoverflow General Index for All Frameworks", 
@@ -58,29 +58,23 @@ async def llama_cloud_rag(input: dict) -> dict:
 
         # Extract input parameters
         query = input.get("query")
-       
+        user_preferences = input.get("user_preferences")
+        context = input.get("context", "")
 
         # Construct the query prompt
         query_prompt = f"""
-        You are a helpful coding assistant. I have a question from a user that needs to be answered using relevant documentation and discussions.
-
-        User Question: {query}
-
-        Please provide a detailed and accurate response that:
-        1. Directly addresses the user's coding question
-        2. Includes relevant code examples when appropriate
-        3. Explains the reasoning behind the solution
-        4. References any best practices or important considerations
-        5. Cites specific documentation or discussions that support the answer
-
-        Format your response in a clear, structured way with:
-        - A direct answer to the question
-        - Code examples (if applicable)
-        - Explanation of key concepts
-        - Any important caveats or considerations
-        - References to supporting documentation
-
-        Base your response only on the most relevant information from the knowledge base.
+        Based on the following information:
+        
+        Query: {query}
+        User Preferences: {user_preferences}
+        Additional Context: {context}
+        
+        Please provide relevant information and insights while considering:
+        1. The specific query requirements
+        2. User's stated preferences
+        3. Any contextual information provided
+        
+        Format the response to be clear and structured.
         """
 
         # Execute query
