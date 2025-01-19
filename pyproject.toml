@@ -23,6 +23,9 @@ restack-ai = "^0.0.52"
 llama-index = "^0.12.5"
 llama-index-indices-managed-llama-cloud = "^0.6.3"
 llama-index-llms-anthropic = "^0.6.3"
+llama-index-llms-perplexity = "^0.3.2"
+gradio = "^5.12.0"
+google-genai = "0.5.0"
 
 
 [build-system]

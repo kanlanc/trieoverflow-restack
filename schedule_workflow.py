@@ -1,16 +1,23 @@
 import asyncio
 import time
 from restack_ai import Restack
-from src.workflows.workflow import GreetingWorkflowInput
+
+
 async def main():
 
     client = Restack()
+
+    # input = {"query":"How do I deploy restack on the cloud"}
+
+    input = {"query":"Write me a function in restack"}
+
+    
 
     workflow_id = f"{int(time.time() * 1000)}-query_question_workflow"
     run_id = await client.schedule_workflow(
         workflow_name="query_question_workflow",
         workflow_id=workflow_id,
-        input="How can I fix the os.stat error that I keep getting in restack"
+        input=input
     )
 
     await client.get_workflow_result(
