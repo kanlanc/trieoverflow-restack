@@ -1,25 +1,22 @@
-import gradio as gr
+import streamlit as st
 from restack_ai import Restack
-from typing import Optional
 import asyncio
 import time
-
-# temp frontend
 
 # Initialize Restack client
 client = Restack()
 
-state={"last_query":""}
+# Initialize session state if not exists
+if 'last_query' not in st.session_state:
+    st.session_state.last_query = ""
 
-async def submit_query(query: str, state: Optional[dict] = None) -> tuple[str, dict]:
+st.title("Restack Query Interface")
+
+async def submit_query(query: str) -> str:
     """Submit a query to the query_question_workflow"""
-    # Schedule the workflow
     workflow_id = f"{int(time.time() * 1000)}-query_question_workflow"
-
-    input = {"query":query}
-
-    print(input)
-
+    input = {"query": query}
+    
     run_id = await client.schedule_workflow(
         workflow_name="query_question_workflow",
         workflow_id=workflow_id,
@@ -31,65 +28,53 @@ async def submit_query(query: str, state: Optional[dict] = None) -> tuple[str, d
         workflow_id=workflow_id,
         run_id=run_id
     )
-   
-    # Store the query in state for later use
-    state = {"last_query": query}
     
-    return f"Query result: {result}", state
+    st.session_state.last_query = query
+    return f"Query result: {result}"
 
-def submit_answer(answer: str, state: Optional[dict] = None) -> str:
+def submit_answer(answer: str) -> str:
     """Submit an answer using the submit_answer_workflow"""
-    if not state or "last_query" not in state:
+    if not st.session_state.last_query:
         return "Error: No query has been submitted yet!"
     
     # Schedule the submit_answer_workflow with both query and answer
     workflow_run = client.schedule_workflow(
         "submit_answer_workflow",
         input={
-            "query": state["last_query"],
+            "query": st.session_state.last_query,
             "answer": answer
         }
     )
     
     return f"Answer submitted! Workflow ID: {workflow_run.id}"
 
-# Create the Gradio interface
-with gr.Blocks() as app:
-    # Initialize state
-    state = gr.State({})
-    
-    with gr.Row():
-        with gr.Column():
-            # Query input
-            query_input = gr.Textbox(
-                label="Enter your query",
-                placeholder="How do I deploy a Next.js application with Restack?"
-            )
-            query_button = gr.Button("Submit Query")
-            query_output = gr.Textbox(label="Query Status")
-            
-        with gr.Column():
-            # Answer input
-            answer_input = gr.Textbox(
-                label="Submit Answer",
-                placeholder="Enter the answer here..."
-            )
-            answer_button = gr.Button("Submit Answer")
-            answer_output = gr.Textbox(label="Answer Status")
-    
-    # Set up event handlers
-    query_button.click(
-        submit_query,
-        inputs=[query_input, state],
-        outputs=[query_output, state],
-        show_progress="full"
-    )
-    
-    answer_button.click(
-        submit_answer,
-        inputs=[answer_input, state],
-        outputs=answer_output
-    )
+# Create two columns for query and answer
+col1, col2 = st.columns(2)
 
-if __name__ == "__main__":
-    app.launch()
+with col1:
+    st.subheader("Submit Query")
+    query = st.text_area(
+        "Enter your query",
+        placeholder="How do I deploy a Next.js application with Restack?"
+    )
+    if st.button("Submit Query"):
+        if query:
+            with st.spinner('Processing your query... Please wait.'):
+                result = asyncio.run(submit_query(query))
+                st.write(result)
+        else:
+            st.error("Please enter a query first!")
+
+with col2:
+    st.subheader("Submit Answer")
+    answer = st.text_area(
+        "Enter the answer",
+        placeholder="Enter the answer here..."
+    )
+    if st.button("Submit Answer"):
+        if answer:
+            with st.spinner('Processing your answer... Please wait.'):
+                result = submit_answer(answer)
+                st.write(result)
+        else:
+            st.error("Please enter an answer first!")
