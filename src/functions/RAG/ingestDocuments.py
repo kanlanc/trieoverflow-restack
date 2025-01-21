@@ -7,6 +7,44 @@ from typing import Dict, List
 import os
 
 
+
+@function.defn()
+async def ingest_documents_to_rag(input: dict) -> dict:
+    # Validate input and API keys
+    if not input:
+        raise FunctionFailure("Invalid input: input dictionary cannot be empty", non_retryable=True)
+    
+    required_keys = {
+        "LLAMA_CLOUD_API_KEY": os.getenv("LLAMA_CLOUD_API_KEY"),
+        "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+    }
+    
+    missing_keys = [k for k, v in required_keys.items() if not v]
+    if missing_keys:
+        raise FunctionFailure(f"Missing required API keys: {', '.join(missing_keys)}", non_retryable=True)
+
+    try:
+        # Initialize LlamaCloud Index
+        index = LlamaCloudIndex(
+            name="Trieoverflow General Index for All Frameworks", 
+            project_name="Trieoverflow",
+            organization_id="37ad34df-e1d9-481e-9007-9b194cf46e13",
+            api_key=required_keys["LLAMA_CLOUD_API_KEY"]
+        )
+
+        # Create questions from processed Discord messages
+        questions = await create_questions_from_processed_discord_messages(input)
+
+        # Ingest documents into the LlamaCloud index
+        index.add_documents(questions)
+
+        # Return success
+        return {"message": "Documents ingested successfully"}
+
+    except Exception as e:
+        log.error(f"Error in llama_cloud_rag: {str(e)}")
+        raise FunctionFailure(f"Failed to process RAG query: {str(e)}", non_retryable=True) from e
+
 async def create_questions_from_processed_discord_messages(input: dict) -> dict:
     # Validate input and API keys
     if not input:

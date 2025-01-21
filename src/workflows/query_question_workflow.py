@@ -15,7 +15,7 @@ with import_functions():
     from src.functions.perplexity.perplexityAgent import perplexityAgent
     from src.functions.RAG.llamaCloudRAG import llama_cloud_rag
     from src.functions.RAG.validateRAGResponse import validate_RAG_response
-    from src.functions.gen_code.restack_code_generator import restack_code_gen
+    # from src.functions.gen_code.restack_code_generator import restack_code_gen
 
     
 
@@ -129,23 +129,23 @@ class query_question_workflow:
         # TODO: MAKE THE TOOL OF RESTACK CLI BE USED
 
 
-        if(True):
+        # if(True):
 
-        # Call code generation function
-            code_gen_input = {
-                "query": RAG_QUERY_INPUT["query"]
-            }
+        # # Call code generation function
+        #     code_gen_input = {
+        #         "query": RAG_QUERY_INPUT["query"]
+        #     }
 
-            code_gen_response = await workflow.step(
-                restack_code_gen,
-                code_gen_input, 
-                start_to_close_timeout=timedelta(minutes=2),
-                # retry_policy=RetryPolicy(maximum_attempts=2)
-            )
+        #     code_gen_response = await workflow.step(
+        #         restack_code_gen,
+        #         code_gen_input, 
+        #         start_to_close_timeout=timedelta(minutes=2),
+        #         # retry_policy=RetryPolicy(maximum_attempts=2)
+        #     )
 
-            log.info(f"Code Generation Response: {code_gen_response}")
+        #     log.info(f"Code Generation Response: {code_gen_response}")
 
-            final_response["code_gen_response"] = code_gen_response
+        #     final_response["code_gen_response"] = code_gen_response
 
 
 
