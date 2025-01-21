@@ -1,54 +1,54 @@
 from restack_ai.function import function, FunctionFailure, log
-from llama_index.llms.anthropic import Anthropic
 from llama_index.indices.managed.llama_cloud import LlamaCloudIndex
 from llama_index.core import get_response_synthesizer
 from llama_index.core.query_engine import RetrieverQueryEngine
 from typing import Dict, List
-import os
 
+from src.utils.google_drive import upload_json_to_drive
+import os
+import time
 
 
 @function.defn()
 async def ingest_documents_to_rag(input: dict) -> dict:
     # Validate input and API keys
     if not input:
-        raise FunctionFailure("Invalid input: input dictionary cannot be empty", non_retryable=True)
+        raise function.FunctionFailure("Invalid input: input dictionary cannot be empty", non_retryable=True)
     
-    required_keys = {
-        "LLAMA_CLOUD_API_KEY": os.getenv("LLAMA_CLOUD_API_KEY"),
-        "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
-    }
-    
-    missing_keys = [k for k, v in required_keys.items() if not v]
-    if missing_keys:
-        raise FunctionFailure(f"Missing required API keys: {', '.join(missing_keys)}", non_retryable=True)
-
+   
     try:
-        # Initialize LlamaCloud Index
-        index = LlamaCloudIndex(
-            name="Trieoverflow General Index for All Frameworks", 
-            project_name="Trieoverflow",
-            organization_id="37ad34df-e1d9-481e-9007-9b194cf46e13",
-            api_key=required_keys["LLAMA_CLOUD_API_KEY"]
-        )
+        # Use the google drive function to upload the json file
+        # There are two fileds to the input dictionary
+        # 1. query
+        # 2. answer
 
-        # Create questions from processed Discord messages
-        questions = await create_questions_from_processed_discord_messages(input)
+        # Convert these two into one json and upload
+        json_data = {
+            "query": input["query"],
+            "answer": input["answer"]
+        }
 
-        # Ingest documents into the LlamaCloud index
-        index.add_documents(questions)
+        # Before this we have to verify if the provided answer is correct, or just
+        # like stack overflow we have to do something to let the users confirm if its 
+        # the correct answer
 
-        # Return success
-        return {"message": "Documents ingested successfully"}
+        filename = f"{int(time.time() * 1000)}-answer.json"
+
+        upload_json_to_drive(json_data, filename)
+        
+        return {
+            "result": "success"
+        }
+        
 
     except Exception as e:
-        log.error(f"Error in llama_cloud_rag: {str(e)}")
-        raise FunctionFailure(f"Failed to process RAG query: {str(e)}", non_retryable=True) from e
+        function.log.error(f"Error in llama_cloud_rag: {str(e)}")
+        raise function.FunctionFailure(f"Error ingesting documents: {str(e)}", non_retryable=True) from e
 
 async def create_questions_from_processed_discord_messages(input: dict) -> dict:
     # Validate input and API keys
     if not input:
-        raise FunctionFailure("Invalid input: input dictionary cannot be empty", non_retryable=True)
+        raise function.FunctionFailure("Invalid input: input dictionary cannot be empty", non_retryable=True)
     
     required_keys = {
         "LLAMA_CLOUD_API_KEY": os.getenv("LLAMA_CLOUD_API_KEY"),
@@ -57,7 +57,7 @@ async def create_questions_from_processed_discord_messages(input: dict) -> dict:
     
     missing_keys = [k for k, v in required_keys.items() if not v]
     if missing_keys:
-        raise FunctionFailure(f"Missing required API keys: {', '.join(missing_keys)}", non_retryable=True)
+        raise function.FunctionFailure(f"Missing required API keys: {', '.join(missing_keys)}", non_retryable=True)
 
     try:
         # Initialize LlamaCloud Index
@@ -128,5 +128,5 @@ async def create_questions_from_processed_discord_messages(input: dict) -> dict:
         }
 
     except Exception as e:
-        log.error(f"Error in llama_cloud_rag: {str(e)}")
-        raise FunctionFailure(f"Failed to process RAG query: {str(e)}", non_retryable=True) from e
+        function.log.error(f"Error in llama_cloud_rag: {str(e)}")
+        raise function.FunctionFailure(f"Failed to process RAG query: {str(e)}", non_retryable=True) from e

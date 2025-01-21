@@ -94,31 +94,38 @@ async def submit_query(query: str) -> dict:
         'result': result
     }
 
-def submit_answer(answer: str) -> str:
+async def submit_answer(answer: str) -> str:
     """Submit an answer using the submit_answer_workflow"""
     if not st.session_state.last_query:
         return """
-### ⚠️ Error
-No query has been submitted yet! Please submit a query first before providing an answer.
-"""
+                ### ⚠️ Error
+                No query has been submitted yet! Please submit a query first before providing an answer.
+                """
+
+    workflow_id = f"{int(time.time() * 1000)}-submit_answer_workflow"
     
-    workflow_run = client.schedule_workflow(
-        "submit_answer_workflow",
+    run_id = await client.schedule_workflow(
+        workflow_name="submit_answer_workflow",
+        workflow_id=workflow_id,
         input={
             "query": st.session_state.last_query,
             "answer": answer
         }
+    )    
+
+    result = await client.get_workflow_result(
+        workflow_id=workflow_id,
+        run_id=run_id
     )
     
     return f"""
-### ✅ Submission Status
+            ### ✅ Submission Status
+            Your answer has been successfully submitted and stored! Thank you for contributing.
 
-Your answer has been successfully submitted!
-
-**Details**
-* **Workflow ID**: `{workflow_run.id}`
-* **Original Query**: `{st.session_state.last_query}`
-"""
+            **Query:** {st.session_state.last_query}
+            **Your Answer:** {answer}
+            **Result:** {result}
+        """
 
 # Initialize response state if not exists
 if 'has_response' not in st.session_state:
@@ -215,7 +222,7 @@ if st.session_state.has_response and st.session_state.current_response:
         if st.button("✨ Submit Answer"):
             if answer:
                 with st.spinner('🔄 Processing your answer... Please wait.'):
-                    result = submit_answer(answer)
+                    result = asyncio.run(submit_answer(answer))
                     st.markdown('<div class="result-container">', unsafe_allow_html=True)
                     st.markdown(result, unsafe_allow_html=False)
                     st.markdown('</div>', unsafe_allow_html=True)

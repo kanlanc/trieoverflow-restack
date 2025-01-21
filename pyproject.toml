@@ -26,6 +26,9 @@ llama-index-llms-anthropic = "^0.6.3"
 llama-index-llms-perplexity = "^0.3.2"
 streamlit = "^1.31.0"
 google-genai = "0.5.0"
+google-api-python-client = "^2.159.0"
+google-auth-httplib2 = "^0.2.0"
+google-auth-oauthlib = "^1.2.1"
 
 
 [build-system]
