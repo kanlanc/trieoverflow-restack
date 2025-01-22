@@ -6,19 +6,16 @@ import requests
 import tomli
 from pathlib import Path
 
-# Load config
-config_path = Path(__file__).parent.parent.parent / "config.toml"
-with open(config_path, "rb") as f:
-    config = tomli.load(f)
+
 
 # API configuration
-API_BASE_URL = config["restack"]["RESTACK_ENGINE_API_ADDRESS"]
+API_BASE_URL = st.secrets["restack"]["RESTACK_ENGINE_API_ADDRESS"]
 if not API_BASE_URL.startswith("http"):
     API_BASE_URL = f"https://{API_BASE_URL}"
 
 headers = {
     "Content-Type": "application/json",
-    "X-API-Key": config["restack"]["RESTACK_ENGINE_API_KEY"]
+    "X-API-Key": st.secrets["restack"]["RESTACK_ENGINE_API_KEY"]
 }
 
 # Custom CSS
