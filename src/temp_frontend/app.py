@@ -2,6 +2,24 @@ import streamlit as st
 from restack_ai import Restack
 import asyncio
 import time
+import requests
+import tomli
+from pathlib import Path
+
+# Load config
+config_path = Path(__file__).parent.parent.parent / "config.toml"
+with open(config_path, "rb") as f:
+    config = tomli.load(f)
+
+# API configuration
+API_BASE_URL = config["restack"]["RESTACK_ENGINE_API_ADDRESS"]
+if not API_BASE_URL.startswith("http"):
+    API_BASE_URL = f"https://{API_BASE_URL}"
+
+headers = {
+    "Content-Type": "application/json",
+    "X-API-Key": config["restack"]["RESTACK_ENGINE_API_KEY"]
+}
 
 # Custom CSS
 st.markdown("""
@@ -56,9 +74,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Initialize Restack client
-client = Restack()
-
 # Initialize session state if not exists
 if 'last_query' not in st.session_state:
     st.session_state.last_query = ""
@@ -69,63 +84,86 @@ st.title("🔍 TrieOverflow")
 st.markdown("_Powered by Snowflake_")
 st.markdown('</div>', unsafe_allow_html=True)
 
-async def submit_query(query: str) -> dict:
-    """Submit a query to the query_question_workflow"""
+def process_query(query: str) -> dict:
+    """Process a query using the query_question_workflow"""
+    
     workflow_id = f"{int(time.time() * 1000)}-query_question_workflow"
-    input = {"query": query}
     
-    run_id = await client.schedule_workflow(
-        workflow_name="query_question_workflow",
-        workflow_id=workflow_id,
-        input=input
+    # Prepare the request payload
+    payload = {
+        "workflow_id": workflow_id,
+        "input": {
+            "query": query
+        }
+    }
+    
+    # Send POST request to the query workflow endpoint
+    response = requests.post(
+        f"{API_BASE_URL}/api/workflows/query_question_workflow",
+        headers=headers,
+        json=payload
     )
-
-    # Wait for the result
-    result = await client.get_workflow_result(
-        workflow_id=workflow_id,
-        run_id=run_id
-    )
     
-    st.session_state.last_query = query
+    if response.status_code != 200:
+        return {
+            'error': f"Error: {response.status_code} - {response.text}"
+        }
     
-    # Return the raw result dictionary
+    result = response.json()
     return {
         'workflow_id': workflow_id,
         'result': result
     }
 
-async def submit_answer(answer: str) -> str:
+def submit_answer(answer: str) -> str:
     """Submit an answer using the submit_answer_workflow"""
     if not st.session_state.last_query:
         return """
-                ### ⚠️ Error
-                No query has been submitted yet! Please submit a query first before providing an answer.
-                """
+### ❌ Error
+No query has been submitted yet! Please submit a query first before providing an answer.
+"""
 
     workflow_id = f"{int(time.time() * 1000)}-submit_answer_workflow"
     
-    run_id = await client.schedule_workflow(
-        workflow_name="submit_answer_workflow",
-        workflow_id=workflow_id,
-        input={
+    # Prepare the request payload
+    payload = {
+        "workflow_id": workflow_id,
+        "input": {
             "query": st.session_state.last_query,
             "answer": answer
         }
-    )    
-
-    result = await client.get_workflow_result(
-        workflow_id=workflow_id,
-        run_id=run_id
-    )
+    }
     
-    return f"""
-            ### ✅ Submission Status
-            Your answer has been successfully submitted and stored! Thank you for contributing.
+    try:
+        # Send POST request to the submit answer workflow endpoint
+        response = requests.post(
+            f"{API_BASE_URL}/api/workflows/submit_answer_workflow",
+            headers=headers,
+            json=payload
+        )
+        
+        if response.status_code != 200:
+            return f"""
+### ❌ Error
+Failed to submit answer: {response.text}
+"""
+        
+        result = response.json()
+        
+        return f"""
+### ✅ Submission Status
+Your answer has been successfully submitted and stored! Thank you for contributing.
 
-            **Query:** {st.session_state.last_query}
-            **Your Answer:** {answer}
-            **Result:** {result}
-        """
+**Query:** {st.session_state.last_query}
+**Your Answer:** {answer}
+**Result:** {result}
+"""
+        
+    except Exception as e:
+        return f"""
+### ❌ Error
+An error occurred while submitting your answer: {str(e)}
+"""
 
 # Initialize response state if not exists
 if 'has_response' not in st.session_state:
@@ -144,7 +182,7 @@ query = st.text_area(
 if st.button("🚀 Submit Query"):
     if query:
         with st.spinner('🔄 Processing your query... Please wait.'):
-            response = asyncio.run(submit_query(query))
+            response = process_query(query)
             st.session_state.current_response = response
             st.session_state.has_response = True
             
@@ -222,7 +260,7 @@ if st.session_state.has_response and st.session_state.current_response:
         if st.button("✨ Submit Answer"):
             if answer:
                 with st.spinner('🔄 Processing your answer... Please wait.'):
-                    result = asyncio.run(submit_answer(answer))
+                    result = submit_answer(answer)
                     st.markdown('<div class="result-container">', unsafe_allow_html=True)
                     st.markdown(result, unsafe_allow_html=False)
                     st.markdown('</div>', unsafe_allow_html=True)

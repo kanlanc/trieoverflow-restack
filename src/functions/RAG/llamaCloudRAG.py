@@ -6,6 +6,49 @@ from llama_index.core.query_engine import RetrieverQueryEngine
 from typing import Dict, List
 import os
 
+
+
+from snowflake.core import Root
+from snowflake.snowpark import Session
+
+CONNECTION_PARAMETERS = {
+    "account": os.environ["snowflake_account_demo"],
+    "user": os.environ["snowflake_user_demo"],
+    "password": os.environ["snowflake_password_demo"],
+    "role": "test_role",
+    "database": "test_database",
+    "warehouse": "test_warehouse",
+    "schema": "test_schema",
+}
+
+session = Session.builder.configs(CONNECTION_PARAMETERS).create()
+root = Root(session)
+
+
+@function.defn()
+async def snowflake_cloud_rag(input: dict) -> dict:
+    # Validate input and API keys
+    if not input:
+        raise FunctionFailure("Invalid input: input dictionary cannot be empty", non_retryable=True)
+
+
+    my_service = (root
+    .databases[os.environ["snowflake_database"]]
+    .schemas[os.environ["snowflake_schema"]]
+    .cortex_search_services[os.environ["snowflake_service"]]
+    )
+
+    # query service
+    resp = my_service.search(
+    query=input["query"],
+    columns=["messages", "answers"],
+    limit=5
+    )
+
+    return {
+        "result": "success"
+    }
+
 @function.defn()
 async def llama_cloud_rag(input: dict) -> dict:
     # Validate input and API keys

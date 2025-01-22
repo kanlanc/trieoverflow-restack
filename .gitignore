@@ -4,6 +4,7 @@ venv
 .env
 .vscode
 poetry.lock
+config.toml
 
 
 
